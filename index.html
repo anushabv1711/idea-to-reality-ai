@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea to Reality AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+    .box {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #1e293b;
+      border-radius: 18px;
+    }
+    textarea {
+      width: 95%;
+      height: 100px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      margin: 15px;
+      padding: 12px 20px;
+      background: #38bdf8;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    #result {
+      text-align: left;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Idea to Reality AI</h1>
+  <p>Turn your ideas into real projects!</p>  <div class="box">
+    <h2>Project Planner</h2>
+    <p>Describe your project idea:</p>
+    <textarea id="idea" placeholder="Example: An app to help students share notes"></textarea>
+    <br>
+    <button onclick="createPlan()">Create My Plan</button>
+    <div id="result"></div>
+  </div>  <script>
+    function createPlan() {
+      const idea = document.getElementById("idea").value.trim();
+      const result = document.getElementById("result");
+
+      if (!idea) {
+        result.innerHTML = "<p>Please enter your project idea first!</p>";
+        return;
+      }
+
+      result.innerHTML = `
+        <h3>Your Project Roadmap 🎯</h3>
+        <p><b>Your idea:</b> ${idea.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}</p>
+        <ol>
+          <li>Identify the problem your project solves.</li>
+          <li>List the main features students need.</li>
+          <li>Design a simple screen.</li>
+          <li>Build a basic working version.</li>
+          <li>Test it with users and improve it.</li>
+        </ol>
+        <p>💡 Start small and improve your project step by step!</p>
+      `;
+    }
+  </script></body>
+</html>
