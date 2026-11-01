@@ -2,182 +2,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Idea to Reality AI</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #101827;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
-.box {
-  max-width: 500px;
-  margin: 25px auto;
-  padding: 22px;
-  background: #1e293b;
-  border-radius: 18px;
-}
-textarea {
-  width: 95%;
-  height: 110px;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-button {
-  margin: 15px;
-  padding: 13px 22px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-#result {
-  text-align: left;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-}
-h3 { color: #38bdf8; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea to Reality AI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+    }
+    .container {
+      max-width: 650px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #1e293b;
+      border-radius: 16px;
+    }
+    h1 { text-align: center; color: #38bdf8; }
+    .subtitle { text-align: center; color: #cbd5e1; }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 14px;
+      margin-top: 15px;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      background: #0f172a;
+      color: white;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+    #result { margin-top: 25px; line-height: 1.7; }
+    .result-card {
+      padding: 18px;
+      margin-top: 15px;
+      background: #0f172a;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+    .result-card h3 { color: #38bdf8; }
+    li { margin-bottom: 8px; }
+    footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>💡 Idea to Reality AI</h1>
+    <p class="subtitle">Turn your project idea into a project plan!</p>
 
-<h1>🚀 Idea to Reality AI</h1>
-<p>Turn your ideas into real projects!</p>
+    <h3>Enter Your Project Idea</h3>
+    <textarea id="idea" placeholder="Example: Create a weather app"></textarea>
+    <button onclick="createPlan()">Create My Plan</button>
+    <div id="result"></div>
 
-<div class="box">
-<h2>Project Planner 💡</h2>
-<p>Describe your project idea:</p>
+    <footer>Made with HTML, CSS and JavaScript</footer>
+  </div>
 
-<textarea id="idea" placeholder="Example: Create an app for students to share notes"></textarea>
+  <script>
+    function createPlan() {
+      const idea = document.getElementById("idea").value.trim();
+      const result = document.getElementById("result");
 
-<br>
-<button onclick="createPlan()">Create My Plan</button>
-<div id="result"></div>
-</div>
+      if (!idea) {
+        result.textContent = "Please enter your project idea first!";
+        return;
+      }
 
-<script>
-function createPlan() {
-  const idea = document.getElementById("idea").value.trim();
-  const result = document.getElementById("result");
+      const words = idea.toLowerCase();
+      let category = "General Project";
+      let features = [];
+      let tools = ["HTML", "CSS", "JavaScript"];
+      let difficulty = "Beginner";
 
-  if (!idea) {
-    result.textContent = "Please enter your project idea first!";
-    return;
-  }
+      if (words.includes("note") || words.includes("study")) {
+        category = "Student Learning Project";
+        features = [
+          "Add and save study notes",
+          "Organize notes by subject",
+          "Search for notes",
+          "Share study materials"
+        ];
+      } else if (words.includes("bus") || words.includes("travel")) {
+        category = "Transport Project";
+        difficulty = "Intermediate";
+        features = [
+          "Show bus information",
+          "Display routes and stops",
+          "Show estimated arrival information",
+          "Provide transport updates"
+        ];
+      } else if (words.includes("expense") || words.includes("money")) {
+        category = "Finance Project";
+        features = [
+          "Record expenses",
+          "Organize spending by category",
+          "Calculate total expenses",
+          "Show a monthly summary"
+        ];
+      } else if (words.includes("food") || words.includes("restaurant")) {
+        category = "Food Project";
+        features = [
+          "Display food items",
+          "Show prices",
+          "Allow users to search",
+          "Show order information"
+        ];
+      } else if (words.includes("health") || words.includes("fitness")) {
+        category = "Health Project";
+        features = [
+          "Record daily activities",
+          "Track personal goals",
+          "Show progress",
+          "Display helpful reminders"
+        ];
+      } else if (words.includes("game") || words.includes("gaming")) {
+        category = "Game Development Project";
+        difficulty = "Intermediate";
+        features = [
+          "Create a game character",
+          "Add levels",
+          "Add points and scores",
+          "Create game rules"
+        ];
+      } else if (words.includes("shop") || words.includes("store")) {
+        category = "Shopping Project";
+        features = [
+          "Display products",
+          "Show product prices",
+          "Search for products",
+          "Create a shopping list"
+        ];
+      } else if (words.includes("plant") || words.includes("environment")) {
+        category = "Environment Project";
+        features = [
+          "Display plant information",
+          "Record plant growth",
+          "Show environmental tips",
+          "Track green activities"
+        ];
+      } else if (words.includes("weather")) {
+        category = "Weather Project";
+        difficulty = "Intermediate";
+        features = [
+          "Display weather information",
+          "Show temperature",
+          "Display weather forecasts",
+          "Show weather alerts"
+        ];
+      } else {
+        features = [
+          "Create a simple home page",
+          "Add the main features of your idea",
+          "Make the design easy to use",
+          "Allow users to interact with the project"
+        ];
+      }
+ 
+      const roadmap = [
+        "Understand the problem your project solves.",
+        "Identify your target users.",
+        "Plan the main features.",
+        "Design the website or app screens.",
+        "Build a basic working version.",
+        "Test it and fix problems.",
+        "Improve the project using feedback."
+      ];
 
-  const words = idea.toLowerCase();
-  let category = "General Project";
-  let features = [];
-  let tools = ["HTML", "CSS", "JavaScript"];
-  let difficulty = "Beginner";
+      result.replaceChildren();
 
-  if (words.includes("note") || words.includes("study")) {
-    category = "Student Learning Project";
-    features = [
-      "Add and save study notes",
-      "Organize notes by subject",
-      "Search for notes",
-      "Share study materials"
-    ];
-  } else if (words.includes("bus") || words.includes("travel")) {
-    category = "Transport Project";
-    features = [
-      "Show bus information",
-      "Display routes and stops",
-      "Show estimated arrival information",
-      "Provide transport updates"
-    ];
-    difficulty = "Intermediate";
-  } else if (words.includes("expense") || words.includes("money")) {
-    category = "Finance Project";
-    features = [
-      "Record expenses",
-      "Organize spending by category",
-      "Calculate total expenses",
-      "Show a monthly summary"
-    ];
-  } else if (words.includes("food") || words.includes("restaurant")) {
-    category = "Food Project";
-    features = [
-      "Display food items",
-      "Show prices",
-      "Allow users to search",
-      "Show order information"
-    ];
-  } else if (words.includes("health") || words.includes("fitness")) {
-    category = "Health Project";
-    features = [
-      "Record daily activities",
-      "Track personal goals",
-      "Show progress",
-      "Display helpful reminders"
-    ];
-  } else {
-    features = [
-      "Create a simple home page",
-      "Add the main features of your idea",
-      "Make the design easy to use",
-      "Allow users to interact with the project"
-    ];
-  }
+      const card = document.createElement("div");
+      card.className = "result-card";
 
-  const roadmap = [
-    "Understand the problem your project solves.",
-    "Identify your target users.",
-    "Plan the main features.",
-    "Design the website or app screens.",
-    "Build a basic working version.",
-    "Test it and fix problems.",
-    "Improve the project using feedback."
-  ];
+      const heading = document.createElement("h3");
+      heading.textContent = "Your Project Roadmap 🎯";
+      card.appendChild(heading);
 
-  result.replaceChildren();
+      const ideaText = document.createElement("p");
+      ideaText.textContent = "Your idea: " + idea;
+      card.appendChild(ideaText);
 
-  const heading = document.createElement("h3");
-  heading.textContent = "Your Project Roadmap 🎯";
-  result.appendChild(heading);
+      const categoryText = document.createElement("p");
+      categoryText.textContent = "Project type: " + category;
+      card.appendChild(categoryText);
 
-  const ideaText = document.createElement("p");
-  ideaText.textContent = "Your idea: " + idea;
-  result.appendChild(ideaText);
+      const difficultyText = document.createElement("p");
+      difficultyText.textContent = "Difficulty: " + difficulty;
+      card.appendChild(difficultyText);
 
-  const categoryText = document.createElement("p");
-  categoryText.textContent = "Project type: " + category;
-  result.appendChild(categoryText);
+      const featureHeading = document.createElement("h3");
+      featureHeading.textContent = "Main Features";
+      card.appendChild(featureHeading);
 
-  const difficultyText = document.createElement("p");
-  difficultyText.textContent = "Difficulty: " + difficulty;
-  result.appendChild(difficultyText);
+      const featureList = document.createElement("ul");
 
-  function addList(title, items) {
-    const h = document.createElement("h3");
-    h.textContent = title;
-    result.appendChild(h);
+      features.forEach(function(feature) {
+        const item = document.createElement("li");
+        item.textContent = feature;
+        featureList.appendChild(item);
+      });
 
-    const list = document.createElement("ol");
-    items.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      list.appendChild(li);
-    });
-    result.appendChild(list);
-  }
+      card.appendChild(featureList);
 
-  addList("Suggested Features 💡", features);
-  addList("Tools to Start 🛠️", tools);
-  addList("Your Steps 🚀", roadmap);
+      const toolsHeading = document.createElement("h3");
+      toolsHeading.textContent = "Tools Required";
+      card.appendChild(toolsHeading);
 
-  const note = document.createElement("p");
-  note.textContent = "Start small, test your idea, and improve it step by step!";
-  result.appendChild(note);
-}
-</script>
+      const toolsList = document.createElement("ul");
 
+      tools.forEach(function(tool) {
+        const item = document.createElement("li");
+        item.textContent = tool;
+        toolsList.appendChild(item);
+      });
+
+      card.appendChild(toolsList);
+
+      const roadmapHeading = document.createElement("h3");
+      roadmapHeading.textContent = "Step-by-Step Roadmap";
+      card.appendChild(roadmapHeading);
+
+      const roadmapList = document.createElement("ol");
+
+      roadmap.forEach(function(step) {
+        const item = document.createElement("li");
+        item.textContent = step;
+        roadmapList.appendChild(item);
+      });
+
+      card.appendChild(roadmapList);
+      result.appendChild(card);
+    }
+  </script>
 </body>
 </html>
+
+
+
+    
