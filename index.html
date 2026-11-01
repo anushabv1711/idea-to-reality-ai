@@ -1,76 +1,183 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Idea to Reality AI</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #101827;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-    .box {
-      max-width: 500px;
-      margin: 30px auto;
-      padding: 25px;
-      background: #1e293b;
-      border-radius: 18px;
-    }
-    textarea {
-      width: 95%;
-      height: 100px;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    button {
-      margin: 15px;
-      padding: 12px 20px;
-      background: #38bdf8;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    #result {
-      text-align: left;
-      line-height: 1.8;
-      overflow-wrap: anywhere;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idea to Reality AI</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.box {
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 22px;
+  background: #1e293b;
+  border-radius: 18px;
+}
+textarea {
+  width: 95%;
+  height: 110px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+button {
+  margin: 15px;
+  padding: 13px 22px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#result {
+  text-align: left;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+h3 { color: #38bdf8; }
+</style>
 </head>
 <body>
-  <h1>🚀 Idea to Reality AI</h1>
-  <p>Turn your ideas into real projects!</p>  <div class="box">
-    <h2>Project Planner</h2>
-    <p>Describe your project idea:</p>
-    <textarea id="idea" placeholder="Example: An app to help students share notes"></textarea>
-    <br>
-    <button onclick="createPlan()">Create My Plan</button>
-    <div id="result"></div>
-  </div>  <script>
-    function createPlan() {
-      const idea = document.getElementById("idea").value.trim();
-      const result = document.getElementById("result");
 
-      if (!idea) {
-        result.innerHTML = "<p>Please enter your project idea first!</p>";
-        return;
-      }
+<h1>🚀 Idea to Reality AI</h1>
+<p>Turn your ideas into real projects!</p>
 
-      result.innerHTML = `
-        <h3>Your Project Roadmap 🎯</h3>
-        <p><b>Your idea:</b> ${idea.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}</p>
-        <ol>
-          <li>Identify the problem your project solves.</li>
-          <li>List the main features students need.</li>
-          <li>Design a simple screen.</li>
-          <li>Build a basic working version.</li>
-          <li>Test it with users and improve it.</li>
-        </ol>
-        <p>💡 Start small and improve your project step by step!</p>
-      `;
-    }
-  </script></body>
+<div class="box">
+<h2>Project Planner 💡</h2>
+<p>Describe your project idea:</p>
+
+<textarea id="idea" placeholder="Example: Create an app for students to share notes"></textarea>
+
+<br>
+<button onclick="createPlan()">Create My Plan</button>
+<div id="result"></div>
+</div>
+
+<script>
+function createPlan() {
+  const idea = document.getElementById("idea").value.trim();
+  const result = document.getElementById("result");
+
+  if (!idea) {
+    result.textContent = "Please enter your project idea first!";
+    return;
+  }
+
+  const words = idea.toLowerCase();
+  let category = "General Project";
+  let features = [];
+  let tools = ["HTML", "CSS", "JavaScript"];
+  let difficulty = "Beginner";
+
+  if (words.includes("note") || words.includes("study")) {
+    category = "Student Learning Project";
+    features = [
+      "Add and save study notes",
+      "Organize notes by subject",
+      "Search for notes",
+      "Share study materials"
+    ];
+  } else if (words.includes("bus") || words.includes("travel")) {
+    category = "Transport Project";
+    features = [
+      "Show bus information",
+      "Display routes and stops",
+      "Show estimated arrival information",
+      "Provide transport updates"
+    ];
+    difficulty = "Intermediate";
+  } else if (words.includes("expense") || words.includes("money")) {
+    category = "Finance Project";
+    features = [
+      "Record expenses",
+      "Organize spending by category",
+      "Calculate total expenses",
+      "Show a monthly summary"
+    ];
+  } else if (words.includes("food") || words.includes("restaurant")) {
+    category = "Food Project";
+    features = [
+      "Display food items",
+      "Show prices",
+      "Allow users to search",
+      "Show order information"
+    ];
+  } else if (words.includes("health") || words.includes("fitness")) {
+    category = "Health Project";
+    features = [
+      "Record daily activities",
+      "Track personal goals",
+      "Show progress",
+      "Display helpful reminders"
+    ];
+  } else {
+    features = [
+      "Create a simple home page",
+      "Add the main features of your idea",
+      "Make the design easy to use",
+      "Allow users to interact with the project"
+    ];
+  }
+
+  const roadmap = [
+    "Understand the problem your project solves.",
+    "Identify your target users.",
+    "Plan the main features.",
+    "Design the website or app screens.",
+    "Build a basic working version.",
+    "Test it and fix problems.",
+    "Improve the project using feedback."
+  ];
+
+  result.replaceChildren();
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Your Project Roadmap 🎯";
+  result.appendChild(heading);
+
+  const ideaText = document.createElement("p");
+  ideaText.textContent = "Your idea: " + idea;
+  result.appendChild(ideaText);
+
+  const categoryText = document.createElement("p");
+  categoryText.textContent = "Project type: " + category;
+  result.appendChild(categoryText);
+
+  const difficultyText = document.createElement("p");
+  difficultyText.textContent = "Difficulty: " + difficulty;
+  result.appendChild(difficultyText);
+
+  function addList(title, items) {
+    const h = document.createElement("h3");
+    h.textContent = title;
+    result.appendChild(h);
+
+    const list = document.createElement("ol");
+    items.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+    result.appendChild(list);
+  }
+
+  addList("Suggested Features 💡", features);
+  addList("Tools to Start 🛠️", tools);
+  addList("Your Steps 🚀", roadmap);
+
+  const note = document.createElement("p");
+  note.textContent = "Start small, test your idea, and improve it step by step!";
+  result.appendChild(note);
+}
+</script>
+
+</body>
 </html>
