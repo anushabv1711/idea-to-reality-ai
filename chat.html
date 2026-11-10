@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idea to Reality AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101827;color:#f1f5f9;font-family:Arial,sans-serif}
+header{padding:20px;background:#1e293b;border-bottom:1px solid #334155}
+header h2{margin:0;color:#38bdf8}
+header p{margin:7px 0 0;color:#94a3b8;font-size:13px}
+main{max-width:700px;margin:auto;padding:18px}
+.welcome{padding:20px;background:#1e293b;border-radius:16px;margin:10px 0 18px}
+.welcome h2{margin-top:0}
+.welcome p{color:#cbd5e1;line-height:1.5}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+button{background:#334155;color:white;border:0;padding:12px;border-radius:10px;font-size:14px}
+button:active{background:#0284c7}
+#chat{padding-bottom:15px}
+.msg{padding:13px 15px;border-radius:13px;margin:12px 0;line-height:1.5;white-space:pre-wrap;max-width:95%}
+.bot{background:#1e293b;border:1px solid #334155}
+.user{background:#075985;margin-left:auto}
+form{display:flex;gap:8px;position:sticky;bottom:0;background:#101827;padding:12px 0}
+input{flex:1;min-width:0;padding:14px;border-radius:10px;border:1px solid #475569;background:#1e293b;color:white;font-size:15px}
+.send{background:#0284c7;font-weight:bold}
+.note{font-size:12px;color:#94a3b8;text-align:center;margin:15px}
+</style>
+</head>
+<body>
+<header>
+<h2>✦ Idea to Reality AI</h2>
+<p>Your student project assistant</p>
+</header>
+
+<main>
+<section class="welcome">
+<h2>What will you build today?</h2>
+<p>Explore project ideas, plan features, learn coding and create your roadmap.</p>
+<div class="tools">
+<button onclick="quick('Give me a unique CSE project idea')">💡 Project ideas</button>
+<button onclick="quick('Suggest features for a student app')">⚙️ Features</button>
+<button onclick="quick('Give me a project roadmap')">🗺️ Roadmap</button>
+<button onclick="quick('Help me learn coding')">💻 Coding help</button>
+</div>
+</section>
+
+<div id="chat">
+<div class="msg bot">Hello! Welcome to Idea to Reality AI. 👋
+
+Tell me your project idea or choose one of the tools above. I'll help you plan your next steps!</div>
+</div>
+
+<form id="form">
+<input id="question" placeholder="Type your question..." autocomplete="off">
+<button class="send" type="submit">Send</button>
+</form>
+<p class="note">Student project assistant • Learning demo</p>
+</main>
+
+<script>
+const chat=document.getElementById("chat");
+const input=document.getElementById("question");
+
+function quick(text){
+input.value=text;
+sendMessage();
+}
+
+function reply(q){
+let s=q.toLowerCase();
+
+if(s.includes("idea")){
+return "Here are 3 beginner-friendly CSE project ideas:\n\n1. Student Notes Sharing App\n2. Campus Lost and Found Website\n3. Student Expense Tracker\n\nChoose one and ask me for its features!";
+}
+if(s.includes("feature")){
+return "Useful student app features:\n\n1. Student login\n2. Notes sharing\n3. Search notes\n4. Subject categories\n5. Save favourite notes\n6. Simple dashboard\n\nWhich feature would you like to build first?";
+}
+if(s.includes("roadmap") || s.includes("steps")){
+return "Beginner project roadmap:\n\n1. Identify the problem.\n2. Decide the main features.\n3. Design the screens.\n4. Build the basic website or app.\n5. Test each feature.\n6. Fix errors.\n7. Publish your project.\n\nTell me your project name for a more specific roadmap.";
+}
+if(s.includes("coding") || s.includes("python")){
+return "Let's learn coding step by step!\n\nStart with Python basics:\n1. print() statements\n2. Variables\n3. Input\n4. if and else\n5. Loops\n6. Lists\n\nExample:\nname = input('Enter your name: ')\nprint('Hello', name)\n\nWhich topic do you want to learn?";
+}
+if(s.includes("bus") || s.includes("transport")){
+return "Transport project idea: Campus Bus Tracker.\n\nPossible features:\n1. Bus route details\n2. Bus timings\n3. Stop locations\n4. Arrival updates\n5. Student notifications\n\nStart with a simple bus timetable before adding live tracking.";
+}
+if(s.includes("expense") || s.includes("money")){
+return "Student Expense Tracker:\n\nFeatures:\n1. Add an expense\n2. Choose a category\n3. View total spending\n4. See a daily summary\n5. Save expense records\n\nStart by building the add-expense screen.";
+}
+if(s.includes("hello") || s.includes("hi")){
+return "Hello! 👋 What would you like to create today? I can help with project ideas, features, roadmaps and beginner coding.";
+}
+return "I can help you with:\n\n💡 CSE project ideas\n⚙️ Project features\n🗺️ Project roadmaps\n💻 Beginner coding help\n\nTry asking: Give me a unique CSE project idea.";
+}
+
+function addMessage(text,type){
+let div=document.createElement("div");
+div.className="msg "+type;
+div.textContent=text;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
+}
+
+function sendMessage(){
+let q=input.value.trim();
+if(!q)return;
+addMessage(q,"user");
+input.value="";
+setTimeout(()=>{
+addMessage(reply(q),"bot");
+},300);
+}
+
+document.getElementById("form").addEventListener("submit",function(e){
+e.preventDefault();
+sendMessage();
+});
+</script>
+</body>
+</html>
