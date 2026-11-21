@@ -2,258 +2,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Idea to Reality AI</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #101827;
-      color: white;
-    }
-    .container {
-      max-width: 650px;
-      margin: 30px auto;
-      padding: 25px;
-      background: #1e293b;
-      border-radius: 16px;
-    }
-    h1 { text-align: center; color: #38bdf8; }
-    .subtitle { text-align: center; color: #cbd5e1; }
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      padding: 14px;
-      margin-top: 15px;
-      border: 1px solid #475569;
-      border-radius: 10px;
-      background: #0f172a;
-      color: white;
-      font-size: 16px;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      background: #0284c7;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 17px;
-      font-weight: bold;
-    }
-    #result { margin-top: 25px; line-height: 1.7; }
-    .result-card {
-      padding: 18px;
-      margin-top: 15px;
-      background: #0f172a;
-      border-radius: 12px;
-      border: 1px solid #334155;
-    }
-    .result-card h3 { color: #38bdf8; }
-    li { margin-bottom: 8px; }
-    footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #94a3b8;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idea to Reality AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;padding:15px;
+ font-family:Arial,sans-serif;
+ background:#101827;color:white
+}
+header{text-align:center;padding:20px 5px}
+header h1{color:#38bdf8;font-size:29px}
+header p{color:#cbd5e1}
+.container{max-width:750px;margin:auto}
+.card{
+ background:#1e293b;padding:18px;
+ margin:15px 0;border-radius:14px;
+ border:1px solid #334155
+}
+h2{color:#38bdf8;font-size:19px}
+textarea,input,select{
+ width:100%;padding:13px;margin:8px 0;
+ border-radius:9px;border:1px solid #475569;
+ background:#0f172a;color:white;font-size:15px
+}
+textarea{min-height:90px}
+button{
+ width:100%;padding:13px;margin:7px 0;
+ background:#0284c7;color:white;
+ border:0;border-radius:9px;
+ font-size:15px;font-weight:bold
+}
+button:active{background:#0369a1}
+.result{
+ background:#0f172a;padding:14px;
+ margin-top:12px;border-radius:9px;
+ border:1px solid #334155;
+ white-space:pre-wrap;line-height:1.6;
+ overflow-wrap:anywhere
+}
+.small{color:#94a3b8;font-size:13px}
+.project{
+ background:#0f172a;padding:12px;
+ margin:9px 0;border-radius:8px
+}
+nav{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:8px;margin:15px 0
+}
+nav a{
+ background:#334155;padding:11px;
+ text-align:center;border-radius:8px;
+ color:white;text-decoration:none;font-size:13px
+}
+footer{text-align:center;color:#94a3b8;padding:25px}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>💡 Idea to Reality AI</h1>
-    <p class="subtitle">Turn your project idea into a project plan!</p>
+<div class="container">
 
-    <h3>Enter Your Project Idea</h3>
-    <textarea id="idea" placeholder="Example: Create a weather app"></textarea>
-    <button onclick="createPlan()">Create My Plan</button>
-    <div id="result"></div>
+<header>
+<h1>🚀 Idea to Reality AI</h1>
+<p>Turn your ideas into real projects!</p>
+<p class="small">Your AI-powered project creation workspace</p>
+</header>
 
-    <footer>Made with HTML, CSS and JavaScript</footer>
-  </div>
+<nav>
+<a href="#idea">💡 Idea Generator</a>
+<a href="#roadmap">🗺️ Roadmap</a>
+<a href="#code">💻 Code Generator</a>
+<a href="#website">🌐 Website Builder</a>
+<a href="#chat">🤖 AI Assistant</a>
+<a href="#projects">📁 My Projects</a>
+<a href="#presentation">📊 Presentation</a>
+<a href="#voice">🎤 Voice Input</a>
+</nav>
 
-  <script>
-    function createPlan() {
-      const idea = document.getElementById("idea").value.trim();
-      const result = document.getElementById("result");
+<section class="card" id="idea">
+<h2>💡 1. AI Idea Generator</h2>
+<p>Generate a project idea based on your interests.</p>
+<input id="interest" placeholder="Example: Education, Health, Technology">
+<button onclick="generateIdea()">Generate My Idea ✨</button>
+<div class="result" id="ideaResult">Your project idea will appear here.</div>
+</section>
 
-      if (!idea) {
-        result.textContent = "Please enter your project idea first!";
-        return;
-      }
+<section class="card" id="roadmap">
+<h2>🗺️ 2. Project Roadmap</h2>
+<textarea id="roadmapInput" placeholder="Enter your project name or idea"></textarea>
+<button onclick="generateRoadmap()">Create Project Roadmap</button>
+<div class="result" id="roadmapResult">Your project steps will appear here.</div>
+</section>
 
-      const words = idea.toLowerCase();
-      let category = "General Project";
-      let features = [];
-      let tools = ["HTML", "CSS", "JavaScript"];
-      let difficulty = "Beginner";
+<section class="card" id="code">
+<h2>💻 3. Code Generator</h2>
+<input id="codeIdea" placeholder="What do you want to create?">
+<select id="language">
+<option>HTML</option>
+<option>Python</option>
+<option>JavaScript</option>
+<option>CSS</option>
+</select>
+<button onclick="generateCode()">Generate Code</button>
+<div class="result" id="codeResult">Your code will appear here.</div>
+<button onclick="copyResult('codeResult')">Copy Code</button>
+</section>
 
-      if (words.includes("note") || words.includes("study")) {
-        category = "Student Learning Project";
-        features = [
-          "Add and save study notes",
-          "Organize notes by subject",
-          "Search for notes",
-          "Share study materials"
-        ];
-      } else if (words.includes("bus") || words.includes("travel")) {
-        category = "Transport Project";
-        difficulty = "Intermediate";
-        features = [
-          "Show bus information",
-          "Display routes and stops",
-          "Show estimated arrival information",
-          "Provide transport updates"
-        ];
-      } else if (words.includes("expense") || words.includes("money")) {
-        category = "Finance Project";
-        features = [
-          "Record expenses",
-          "Organize spending by category",
-          "Calculate total expenses",
-          "Show a monthly summary"
-        ];
-      } else if (words.includes("food") || words.includes("restaurant")) {
-        category = "Food Project";
-        features = [
-          "Display food items",
-          "Show prices",
-          "Allow users to search",
-          "Show order information"
-        ];
-      } else if (words.includes("health") || words.includes("fitness")) {
-        category = "Health Project";
-        features = [
-          "Record daily activities",
-          "Track personal goals",
-          "Show progress",
-          "Display helpful reminders"
-        ];
-      } else if (words.includes("game") || words.includes("gaming")) {
-        category = "Game Development Project";
-        difficulty = "Intermediate";
-        features = [
-          "Create a game character",
-          "Add levels",
-          "Add points and scores",
-          "Create game rules"
-        ];
-      } else if (words.includes("shop") || words.includes("store")) {
-        category = "Shopping Project";
-        features = [
-          "Display products",
-          "Show product prices",
-          "Search for products",
-          "Create a shopping list"
-        ];
-      } else if (words.includes("plant") || words.includes("environment")) {
-        category = "Environment Project";
-        features = [
-          "Display plant information",
-          "Record plant growth",
-          "Show environmental tips",
-          "Track green activities"
-        ];
-      } else if (words.includes("weather")) {
-        category = "Weather Project";
-        difficulty = "Intermediate";
-        features = [
-          "Display weather information",
-          "Show temperature",
-          "Display weather forecasts",
-          "Show weather alerts"
-        ];
-      } else {
-        features = [
-          "Create a simple home page",
-          "Add the main features of your idea",
-          "Make the design easy to use",
-          "Allow users to interact with the project"
-        ];
-      }
- 
-      const roadmap = [
-        "Understand the problem your project solves.",
-        "Identify your target users.",
-        "Plan the main features.",
-        "Design the website or app screens.",
-        "Build a basic working version.",
-        "Test it and fix problems.",
-        "Improve the project using feedback."
-      ];
+<section class="card" id="website">
+<h2>🌐 4. Website Builder</h2>
+<input id="siteTitle" placeholder="Website title">
+<textarea id="siteDescription" placeholder="Describe your website"></textarea>
+<button onclick="buildWebsite()">Create My Website</button>
+<div class="result" id="websiteResult">Your website preview will appear here.</div>
+<button onclick="downloadWebsite()">Download Website HTML</button>
+</section>
 
-      result.replaceChildren();
+<section class="card" id="chat">
+<h2>🤖 5. AI Chat Assistant</h2>
+<p class="small">Ask questions about project building and coding.</p>
+<div class="result" id="chatResult">Hello! How can I help with your project?</div>
+<input id="chatInput" placeholder="Ask something...">
+<button onclick="chatAssistant()">Send Message</button>
+</section>
 
-      const card = document.createElement("div");
-      card.className = "result-card";
+<section class="card" id="projects">
+<h2>📁 6. My Projects Dashboard</h2>
+<input id="projectName" placeholder="Enter project name">
+<textarea id="projectDescription" placeholder="Project description"></textarea>
+<button onclick="saveProject()">Save My Project</button>
+<div id="projectList"></div>
+</section>
 
-      const heading = document.createElement("h3");
-      heading.textContent = "Your Project Roadmap 🎯";
-      card.appendChild(heading);
+<section class="card" id="presentation">
+<h2>📊 7. Presentation Generator</h2>
+<input id="presentationTopic" placeholder="Enter presentation topic">
+<button onclick="generatePresentation()">Create Presentation</button>
+<div class="result" id="presentationResult">Your presentation outline will appear here.</div>
+<button onclick="copyResult('presentationResult')">Copy Presentation</button>
+</section>
 
-      const ideaText = document.createElement("p");
-      ideaText.textContent = "Your idea: " + idea;
-      card.appendChild(ideaText);
+<section class="card" id="voice">
+<h2>🎤 8. Voice Input</h2>
+<p>Speak your project idea instead of typing.</p>
+<button onclick="startVoice()">🎙️ Start Speaking</button>
+<div class="result" id="voiceResult">Your voice text will appear here.</div>
+</section>
 
-      const categoryText = document.createElement("p");
-      categoryText.textContent = "Project type: " + category;
-      card.appendChild(categoryText);
+<footer>
+<p>🚀 Idea to Reality AI</p>
+<p>Made for creative students and future innovators.</p>
+</footer>
 
-      const difficultyText = document.createElement("p");
-      difficultyText.textContent = "Difficulty: " + difficulty;
-      card.appendChild(difficultyText);
+</div>
 
-      const featureHeading = document.createElement("h3");
-      featureHeading.textContent = "Main Features";
-      card.appendChild(featureHeading);
+<script>
+function show(id,text){
+ document.getElementById(id).textContent=text;
+}
 
-      const featureList = document.createElement("ul");
+function generateIdea(){
+ let topic=document.getElementById("interest").value.trim();
+ if(!topic) topic="Technology";
+ let ideas=[
+ "Smart Student Learning Platform",
+ "AI Based Campus Information System",
+ "Digital Project Management System",
+ "Smart Daily Expense Tracker",
+ "Student Attendance Management App",
+ "Online Skill Development Platform"
+ ];
+ let n=Math.floor(Math.random()*ideas.length);
+ show("ideaResult",
+ "Your project idea: "+ideas[n]+
+ "\n\nInterest: "+topic+
+ "\n\nGoal: Create a useful solution for students and society."+
+ "\n\nLevel: Beginner"+
+ "\n\nStart by researching the problem and planning your design.");
+}
 
-      features.forEach(function(feature) {
-        const item = document.createElement("li");
-        item.textContent = feature;
-        featureList.appendChild(item);
-      });
+function generateRoadmap(){
+ let p=document.getElementById("roadmapInput").value.trim();
+ if(!p){show("roadmapResult","Please enter a project idea.");return;}
+ show("roadmapResult",
+ "PROJECT: "+p+
+ "\n\nSTEP 1: Identify the problem."+
+ "\n\nSTEP 2: Research existing solutions."+
+ "\n\nSTEP 3: List the required features."+
+ "\n\nSTEP 4: Design the user interface."+
+ "\n\nSTEP 5: Develop the project."+
+ "\n\nSTEP 6: Test and fix errors."+
+ "\n\nSTEP 7: Improve and present your project.");
+}
 
-      card.appendChild(featureList);
+function generateCode(){
+ let p=document.getElementById("codeIdea").value.trim();
+ let lang=document.getElementById("language").value;
+ if(!p){show("codeResult","Please describe what you want to create.");return;}
+ let code="";
+ if(lang==="HTML"){
+ code='<!DOCTYPE html>\n<html>\n<head>\n<title>My Project</title>\n</head>\n<body>\n<h1>'+p+'</h1>\n<p>Welcome to my project!</p>\n<button onclick="alert(\\'Hello!\\')">Click Me</button>\n</body>\n</html>';
+ }else if(lang==="Python"){
+ code='# '+p+'\nprint("Welcome to my project!")\nname = input("Enter your name: ")\nprint("Hello", name)';
+ }else if(lang==="JavaScript"){
+ code='// '+p+'\nfunction myProject(){\n console.log("Welcome to my project!");\n}\nmyProject();';
+ }else{
+ code='/* '+p+' */\nbody {\n background: #101827;\n color: white;\n font-family: Arial;\n padding: 20px;\n}';
+ }
+ show("codeResult",code);
+}
 
-      const toolsHeading = document.createElement("h3");
-      toolsHeading.textContent = "Tools Required";
-      card.appendChild(toolsHeading);
+let websiteCode="";
+function buildWebsite(){
+ let title=document.getElementById("siteTitle").value.trim();
+ let desc=document.getElementById("siteDescription").value.trim();
+ if(!title){show("websiteResult","Please enter a website title.");return;}
+ websiteCode='<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+escapeHTML(title)+'</title><style>body{font-family:Arial;background:#101827;color:white;text-align:center;padding:50px}h1{color:#38bdf8}</style></head><body><h1>'+escapeHTML(title)+'</h1><p>'+escapeHTML(desc)+'</p></body></html>';
+ show("websiteResult","Website created successfully!\n\nTitle: "+title+"\n\nDescription: "+desc+"\n\nTap Download Website HTML to save your website.");
+}
+function escapeHTML(s){
+ return s.replace(/[&<>"']/g,function(c){
+ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+ });
+}
+function downloadWebsite(){
+ if(!websiteCode){show("websiteResult","Create your website first.");return;}
+ let blob=new Blob([websiteCode],{type:"text/html"});
+ let url=URL.createObjectURL(blob);
+ let a=document.createElement("a");
+ a.href=url;a.download="my-website.html";
+ a.click();
+ URL.revokeObjectURL(url);
+}
 
-      const toolsList = document.createElement("ul");
+function chatAssistant(){
+ let q=document.getElementById("chatInput").value.trim().toLowerCase();
+ if(!q)return;
+ let answer="I can help you plan your project. Start by identifying the problem, choosing features and building a simple version.";
+ if(q.includes("python")) answer="Python is a beginner-friendly programming language. Start with variables, input, conditions, loops and functions.";
+ else if(q.includes("html")) answer="HTML creates the structure of a website. Start with headings, paragraphs, images, links and buttons.";
+ else if(q.includes("project")) answer="First select a real problem. Then research it, plan features, design, develop and test your project.";
+ else if(q.includes("roadmap")) answer="Your roadmap: Research → Planning → Design → Coding → Testing → Presentation.";
+ else if(q.includes("hello")||q.includes("hi")) answer="Hello! Welcome to Idea to Reality AI. What project would you like to build?";
+ else if(q.includes("javascript")) answer="JavaScript adds interactive features to websites. Start with variables, functions, conditions and events.";
+ show("chatResult","You: "+q+"\n\nAssistant: "+answer);
+ document.getElementById("chatInput").value="";
+}
 
-      tools.forEach(function(tool) {
-        const item = document.createElement("li");
-        item.textContent = tool;
-        toolsList.appendChild(item);
-      });
+function saveProject(){
+ let name=document.getElementById("projectName").value.trim();
+ let desc=document.getElementById("projectDescription").value.trim();
+ if(!name){alert("Enter a project name.");return;}
+ let projects=JSON.parse(localStorage.getItem("myProjects")||"[]");
+ projects.push({name:name,description:desc});
+ localStorage.setItem("myProjects",JSON.stringify(projects));
+ document.getElementById("projectName").value="";
+ document.getElementById("projectDescription").value="";
+ displayProjects();
+}
+function displayProjects(){
+ let projects=JSON.parse(localStorage.getItem("myProjects")||"[]");
+ let html="";
+ projects.forEach((p,i)=>{
+ html+='<div class="project"><b>'+escapeHTML(p.name)+'</b><p>'+escapeHTML(p.description)+'</p><button onclick="deleteProject('+i+')">Delete Project</button></div>';
+ });
+ document.getElementById("projectList").innerHTML=html||'<p class="small">No projects saved yet.</p>';
+}
+function deleteProject(i){
+ let projects=JSON.parse(localStorage.getItem("myProjects")||"[]");
+ projects.splice(i,1);
+ localStorage.setItem("myProjects",JSON.stringify(projects));
+ displayProjects();
+}
 
-      card.appendChild(toolsList);
+function generatePresentation(){
+ let topic=document.getElementById("presentationTopic").value.trim();
+ if(!topic){show("presentationResult","Enter a topic first.");return;}
+ show("presentationResult",
+ "SLIDE 1: TITLE\n"+topic+
+ "\n\nSLIDE 2: INTRODUCTION\nIntroduce your topic."+
+ "\n\nSLIDE 3: PROBLEM\nExplain the problem."+
+ "\n\nSLIDE 4: OBJECTIVES\nList the main goals."+
+ "\n\nSLIDE 5: SOLUTION\nExplain your proposed solution."+
+ "\n\nSLIDE 6: WORKING\nDescribe how it works."+
+ "\n\nSLIDE 7: ADVANTAGES\nList important benefits."+
+ "\n\nSLIDE 8: CONCLUSION\nSummarize your project.");
+}
 
-      const roadmapHeading = document.createElement("h3");
-      roadmapHeading.textContent = "Step-by-Step Roadmap";
-      card.appendChild(roadmapHeading);
+function startVoice(){
+ let Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!Speech){show("voiceResult","Voice recognition is not supported in this browser. Try Chrome.");return;}
+ let recognition=new Speech();
+ recognition.lang="en-IN";
+ recognition.onresult=function(e){
+ let result=e.results[0][0].transcript;
+ show("voiceResult",result);
+ document.getElementById("roadmapInput").value=result;
+ };
+ recognition.onerror=function(){
+ show("voiceResult","Voice recognition failed. Please try again.");
+ };
+ recognition.start();
+}
 
-      const roadmapList = document.createElement("ol");
-
-      roadmap.forEach(function(step) {
-        const item = document.createElement("li");
-        item.textContent = step;
-        roadmapList.appendChild(item);
-      });
-
-      card.appendChild(roadmapList);
-      result.appendChild(card);
-    }
-  </script>
+displayProjects();
+</script>
 </body>
 </html>
-
-
-
-    
